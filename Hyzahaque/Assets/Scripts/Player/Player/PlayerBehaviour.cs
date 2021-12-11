@@ -10,6 +10,9 @@ public class PlayerBehaviour : MonoBehaviour
     private Rigidbody2D rb2d;
     private SpriteRenderer spriteRenderer;
 
+    private BodyBehaviour Body;
+    private HeadBehaviour Head;
+
     //keep in memory the current movement performed
     private Vector2 currentMovement;
 
@@ -27,6 +30,8 @@ public class PlayerBehaviour : MonoBehaviour
         inputMap.PlayerInput.Movement.canceled += Moving;
         inputMap.PlayerInput.Movement.Enable();
 
+        Head = transform.GetChild(0).gameObject.GetComponent<HeadBehaviour>();
+        Body = transform.GetChild(1).gameObject.GetComponent<BodyBehaviour>();
     }
 
     // Update is called once per frame
@@ -40,5 +45,12 @@ public class PlayerBehaviour : MonoBehaviour
     void Moving(InputAction.CallbackContext ctx)
     {
         currentMovement = ctx.ReadValue<Vector2>();
+
+        if (currentMovement.x != 0)
+            Head.SecondDirection = currentMovement.x > 0 ? HeadBehaviour.SHOOTINGDIRECTION.RIGHT : HeadBehaviour.SHOOTINGDIRECTION.LEFT;
+        else if (currentMovement.y != 0)
+            Head.SecondDirection = currentMovement.y > 0 ? HeadBehaviour.SHOOTINGDIRECTION.UP : HeadBehaviour.SHOOTINGDIRECTION.DOWN;
+        else
+            Head.SecondDirection = HeadBehaviour.SHOOTINGDIRECTION.DOWN;
     }
 }
