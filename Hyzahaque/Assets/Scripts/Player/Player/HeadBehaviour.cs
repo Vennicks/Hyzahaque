@@ -50,7 +50,7 @@ public class HeadBehaviour : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (PrimaryDirection != SHOOTINGDIRECTION.NONE)
+        if (FiringStatus)
         {
             Debug.Log("Firing, Direction: " + SystemDebug[(int)PrimaryDirection]);
         }
