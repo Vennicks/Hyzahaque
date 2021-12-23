@@ -1,16 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class HeadBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private InputMap inputMap;
-    private Transform LeftSpawn;
-    private Transform RightSpawn;
-
     public enum SHOOTINGDIRECTION
     {
         UP,
@@ -28,7 +24,19 @@ public class HeadBehaviour : MonoBehaviour
         "RIGHT"
     };
 
-    [SerializeField] private float ShootingSpeed = 100;
+
+    // Start is called before the first frame update
+    private InputMap inputMap;
+    private Transform RightSpawn;
+    private Transform LeftSpawn;
+
+    private bool CanFire = true;
+    private int EyeFiring = 1;
+
+    [SerializeField] private float ShootingSpeed = 2f;
+    [SerializeField] private GameObject Tear;
+    [SerializeField] private float TearForce = 0.5f;
+    [SerializeField] private float TearLifetime = 2f;
 
     private SHOOTINGDIRECTION PrimaryDirection = SHOOTINGDIRECTION.NONE;
     public SHOOTINGDIRECTION SecondDirection = SHOOTINGDIRECTION.DOWN;
@@ -39,8 +47,8 @@ public class HeadBehaviour : MonoBehaviour
     {
         inputMap = new InputMap();
 
-        LeftSpawn = transform.GetChild(0).transform;
-        RightSpawn = transform.GetChild(1).transform;
+        RightSpawn = transform.GetChild(0).transform;
+        LeftSpawn = transform.GetChild(1).transform;
 
         inputMap.PlayerInput.Shooting.performed += Firing;
         inputMap.PlayerInput.Shooting.canceled += Cancel;
@@ -52,11 +60,11 @@ public class HeadBehaviour : MonoBehaviour
     {
         if (FiringStatus)
         {
-            Debug.Log("Firing, Direction: " + SystemDebug[(int)PrimaryDirection]);
+            HandleFiring();
         }
         else
         {
-            Debug.Log("Not Firing, Direction: " + SystemDebug[(int)SecondDirection]);
+            //Debug.Log("Not Firing, Direction: " + SystemDebug[(int)SecondDirection]);
         }
     }
 
@@ -67,7 +75,7 @@ public class HeadBehaviour : MonoBehaviour
         FiringStatus = true;
 
         if (ShootingDir.x != 0)
-            PrimaryDirection = ShootingDir.x > 0 ? SHOOTINGDIRECTION.RIGHT : SHOOTINGDIRECTION.LEFT;
+            PrimaryDirection = ShootingDir.x < 0 ? SHOOTINGDIRECTION.RIGHT : SHOOTINGDIRECTION.LEFT;
 
         if (ShootingDir.y != 0)
             PrimaryDirection = ShootingDir.y > 0 ? SHOOTINGDIRECTION.UP : SHOOTINGDIRECTION.DOWN;
@@ -77,5 +85,90 @@ public class HeadBehaviour : MonoBehaviour
     {
         PrimaryDirection = SHOOTINGDIRECTION.DOWN;
         FiringStatus = false;
+    }
+
+    private IEnumerator EnableFiring()
+    {
+        yield return new WaitForSeconds(ShootingSpeed);
+        CanFire = true;
+    }
+
+    void HandleFiring()
+    {
+        if (!CanFire)
+            return;
+
+        GameObject NewTear = Tear;
+
+        Transform TearTransform = null;
+
+        int Layer_Tear = GetComponent<SpriteRenderer>().sortingOrder;
+
+        Vector2 Direc = new Vector2(0, 0);
+
+        switch (PrimaryDirection) {
+            case SHOOTINGDIRECTION.LEFT:
+                TearTransform = LeftSpawn;
+
+                if (EyeFiring == 1)
+                    Layer_Tear -= 1;
+                else
+                    Layer_Tear += 1;
+
+                Direc.x -= TearForce;
+                break;
+
+            case SHOOTINGDIRECTION.RIGHT:
+                TearTransform = RightSpawn;
+
+                if (EyeFiring == 1)
+                    Layer_Tear -= 1;
+                else
+                    Layer_Tear += 1;
+
+                Direc.x += TearForce;
+
+                break;
+
+            case SHOOTINGDIRECTION.UP:
+                Layer_Tear -= 1;
+
+                if (EyeFiring == 1)
+                    TearTransform = RightSpawn;
+                else
+                    TearTransform = LeftSpawn;
+
+
+                Direc.y -= TearForce;
+                break;
+
+            case SHOOTINGDIRECTION.DOWN:
+                Layer_Tear += 1;
+
+                if (EyeFiring == 1)
+                    TearTransform = RightSpawn;
+                else
+                    TearTransform = LeftSpawn;
+
+                Direc.y += TearForce;
+                break;
+
+            default:
+                break;
+
+            }
+
+        NewTear.GetComponent<SpriteRenderer>().sortingOrder = Layer_Tear;
+        NewTear.GetComponent<FriendlyTearBehaviour>().Direction = Direc;
+        NewTear.GetComponent<FriendlyTearBehaviour>().Speed = TearForce;
+        NewTear.GetComponent<FriendlyTearBehaviour>().Lifetime = TearLifetime;
+
+        Instantiate(NewTear, TearTransform.position, transform.localRotation);
+
+        EyeFiring *= -1; //Invert crying eye
+
+        CanFire = false;
+
+        StartCoroutine(EnableFiring());
     }
 }

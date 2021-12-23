@@ -280,6 +280,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5441686216476540472, guid: 8b4028833c53b754dbb79920da149907, type: 3}
+      propertyPath: TearForce
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5441686216476634816, guid: 8b4028833c53b754dbb79920da149907, type: 3}
       propertyPath: m_Name
       value: Player

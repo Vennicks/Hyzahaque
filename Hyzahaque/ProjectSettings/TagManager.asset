@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Tear
+  - Walls
+  - Background
+  - Collectibles
+  - Ennemy
+  - NormalDoor
+  - HiddenDoor
+  - UnbreakableDoor
+  - Rock
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -11,14 +21,14 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Background
+  - Walls
+  - Items
+  - Collectibles
+  - Ennemies
+  - Tears
+  - HeadCharacters
+  - BodyCharacters
   - 
   - 
   - 
