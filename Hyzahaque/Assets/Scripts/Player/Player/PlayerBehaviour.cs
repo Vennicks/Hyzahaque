@@ -17,7 +17,11 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector2 currentMovement;
 
     //Serialized Field = things that can be edited easily
-    [SerializeField] private float speed = 300;
+    [SerializeField] 
+    private float speed = 300;
+
+    [SerializeField] 
+    private float CoolDownInvulnerability = 1.5f;
 
     [SerializeField]
     public GameObject exbomb;
@@ -26,6 +30,7 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject explode;
 
     public bool GotExplosiveBelt = false;
+    private bool CanTakeDMG = true;
 
     // Start is called before the first frame update
     void Start()
@@ -78,8 +83,18 @@ public class PlayerBehaviour : MonoBehaviour
         Instantiate(explode, transform.position, transform.rotation);
     }
 
+    IEnumerator CoolDownTD()
+    {
+        yield return new WaitForSeconds(CoolDownInvulnerability);
+        CanTakeDMG = true;
+    }
+
     public void TakeDamages(int dmg)
     {
+        if (!CanTakeDMG)
+            return;
+        CanTakeDMG = false;
+        StartCoroutine(CoolDownTD());
         PersistentManager.Instance.CurrentHealth -= dmg;
         Debug.Log("Took " + dmg + " damages");
     }

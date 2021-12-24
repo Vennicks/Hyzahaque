@@ -98,8 +98,6 @@ public class HeadBehaviour : MonoBehaviour
         if (!CanFire)
             return;
 
-        GameObject NewTear = Tear;
-
         Transform TearTransform = null;
 
         int Layer_Tear = GetComponent<SpriteRenderer>().sortingOrder;
@@ -115,7 +113,7 @@ public class HeadBehaviour : MonoBehaviour
                 else
                     Layer_Tear += 1;
 
-                Direc.x -= TearForce;
+                Direc.x += TearForce;
                 break;
 
             case SHOOTINGDIRECTION.RIGHT:
@@ -126,7 +124,7 @@ public class HeadBehaviour : MonoBehaviour
                 else
                     Layer_Tear += 1;
 
-                Direc.x += TearForce;
+                Direc.x -= TearForce;
 
                 break;
 
@@ -139,7 +137,7 @@ public class HeadBehaviour : MonoBehaviour
                     TearTransform = LeftSpawn;
 
 
-                Direc.y -= TearForce;
+                Direc.y += TearForce;
                 break;
 
             case SHOOTINGDIRECTION.DOWN:
@@ -150,7 +148,7 @@ public class HeadBehaviour : MonoBehaviour
                 else
                     TearTransform = LeftSpawn;
 
-                Direc.y += TearForce;
+                Direc.y -= TearForce;
                 break;
 
             default:
@@ -158,10 +156,12 @@ public class HeadBehaviour : MonoBehaviour
 
             }
 
-        NewTear.GetComponent<SpriteRenderer>().sortingOrder = Layer_Tear;
-        NewTear.GetComponent<FriendlyTearBehaviour>().Direction = Direc;
-        NewTear.GetComponent<FriendlyTearBehaviour>().Speed = TearForce;
-        NewTear.GetComponent<FriendlyTearBehaviour>().Lifetime = TearLifetime;
+        GameObject NewTear = Tear;
+
+        Tear.GetComponent<SpriteRenderer>().sortingOrder = Layer_Tear;
+        Tear.GetComponent<FriendlyTearBehaviour>().Direction = Direc;
+        Tear.GetComponent<FriendlyTearBehaviour>().Speed = TearForce;
+        Tear.GetComponent<FriendlyTearBehaviour>().Lifetime = TearLifetime;
 
         Instantiate(NewTear, TearTransform.position, transform.localRotation);
 

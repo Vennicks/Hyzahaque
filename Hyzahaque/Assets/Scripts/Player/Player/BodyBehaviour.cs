@@ -42,7 +42,7 @@ public class BodyBehaviour : MonoBehaviour
                 Destroy(obj);
             }
         }
-        if (obj.name.Contains("BombLoot") && obj.name != "ExplodingBomb")
+        if (obj.name.Contains("BombItem") && obj.name != "ExplodingBomb")
         {
             PersistentManager.Instance.Bombs += 1;
             Debug.Log("Add a bomb in UI");
@@ -88,5 +88,10 @@ public class BodyBehaviour : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void TakeDamages(int i)
+    {
+        transform.parent.GetComponent<PlayerBehaviour>().TakeDamages(i);
     }
 }

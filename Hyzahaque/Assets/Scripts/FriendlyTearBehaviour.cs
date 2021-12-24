@@ -5,13 +5,10 @@ using UnityEngine;
 
 public class FriendlyTearBehaviour : MonoBehaviour
 {
-    [System.NonSerialized]
     public float Speed = 0;
-    [System.NonSerialized]
     public float Lifetime = 0;
-
-    [System.NonSerialized]
     public Vector2 Direction = new Vector2();
+    public int dmg = 1;
 
     Rigidbody2D rdb2;
 
@@ -19,7 +16,7 @@ public class FriendlyTearBehaviour : MonoBehaviour
     void Awake()
     {
         rdb2 = GetComponent<Rigidbody2D>();
-
+        StartCoroutine(KillItself());
     }
 
     // Update is called once per frame
@@ -27,4 +24,57 @@ public class FriendlyTearBehaviour : MonoBehaviour
     {
         rdb2.velocity = (Direction * Speed * Time.deltaTime);
     }
+
+    IEnumerator KillItself()
+    {
+        yield return new WaitForSeconds(Lifetime);
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject go = collision.gameObject;
+
+        switch (go.tag)
+        {
+            case "Ennemy":
+                Destroy(gameObject);
+                if (go.name.Contains("Dip"))
+                    go.GetComponent<DipBehaviour>().TakeDamages(dmg);
+
+                else if (go.name.Contains("Fatty"))
+                    go.GetComponent<FattyBehaviour>().TakeDamages(dmg);
+
+                break;
+
+            case "Walls":
+                Destroy(gameObject);
+                break;
+
+            case "Rock":
+                Destroy(gameObject);
+                break;
+
+            case "NormalDoor":
+                Destroy(gameObject);
+                break;
+
+            case "HiddenDoor":
+                Destroy(gameObject);
+                break;
+
+            case "UnbreakableDoor":
+                Destroy(gameObject);
+                break;
+
+            case "Player":
+                break;
+
+            default:
+                Destroy(gameObject);
+                break;
+        }
+
+    }
+
 }
