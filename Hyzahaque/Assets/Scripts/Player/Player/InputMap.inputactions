@@ -11,7 +11,8 @@
                     "id": "e31bbab6-b482-4264-a065-61380c03a679",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Shooting",
@@ -19,7 +20,8 @@
                     "id": "35f83d75-57a1-4682-a072-329d33f5573e",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Pause",
@@ -27,7 +29,8 @@
                     "id": "23a83441-9412-4c8c-b244-f94ebc65f08b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Hud",
@@ -35,7 +38,8 @@
                     "id": "333fe457-acd5-4d15-9421-78be675ddc3d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Bomb",
@@ -43,7 +47,8 @@
                     "id": "240b7a70-d722-4796-a9d3-4f5f31b2389d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Consumable",
@@ -51,7 +56,17 @@
                     "id": "1433ff4b-78ae-424c-a309-7bf01c1176db",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Activable",
+                    "type": "Button",
+                    "id": "813f38dd-6a0e-4f1e-a2ff-c34cc6a7c872",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -461,6 +476,17 @@
                     "action": "Consumable",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44ae6577-adea-4a79-bd80-3467e2c03adb",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Activable",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -474,7 +500,8 @@
                     "id": "ce67de72-ea4a-4dc5-9b6d-5a0f54ce0690",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "GoBack",
@@ -482,7 +509,8 @@
                     "id": "92134f5e-e28b-49c0-9439-854f37bd6b25",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "SpecialKey",
@@ -490,7 +518,8 @@
                     "id": "25aa2939-598d-40b2-a4b0-faef0c8fe0af",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Navigate",
@@ -498,7 +527,8 @@
                     "id": "e6264164-4b99-48bc-aea6-1742565549ee",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
