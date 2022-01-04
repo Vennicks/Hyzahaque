@@ -29,6 +29,7 @@ public class HeadBehaviour : MonoBehaviour
     private InputMap inputMap;
     private Transform RightSpawn;
     private Transform LeftSpawn;
+    private Animator animator;
 
     private bool CanFire = true;
     private int EyeFiring = 1;
@@ -47,6 +48,7 @@ public class HeadBehaviour : MonoBehaviour
     {
         inputMap = new InputMap();
 
+        animator = GetComponent<Animator>();
         RightSpawn = transform.GetChild(0).transform;
         LeftSpawn = transform.GetChild(1).transform;
 
@@ -64,7 +66,17 @@ public class HeadBehaviour : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Not Firing, Direction: " + SystemDebug[(int)SecondDirection]);
+            switch (SecondDirection)
+            {
+                case SHOOTINGDIRECTION.LEFT:
+                    break;
+                case SHOOTINGDIRECTION.RIGHT:
+                    break;
+                case SHOOTINGDIRECTION.UP:
+                    break;
+                case SHOOTINGDIRECTION.DOWN:
+                    break;
+            }
         }
     }
 
