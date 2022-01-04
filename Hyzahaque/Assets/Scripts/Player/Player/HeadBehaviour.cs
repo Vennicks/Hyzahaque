@@ -78,7 +78,7 @@ public class HeadBehaviour : MonoBehaviour
                     GetComponent<SpriteRenderer>().flipX = false;
                     break;
                 case SHOOTINGDIRECTION.UP:
-                    animator.SetInteger("IdleState", 3);
+                    animator.SetInteger("IdleState", 2);
                     GetComponent<SpriteRenderer>().flipX = false;
                     break;
                 case SHOOTINGDIRECTION.DOWN:
