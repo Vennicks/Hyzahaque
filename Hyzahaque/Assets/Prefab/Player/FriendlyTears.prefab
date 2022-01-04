@@ -136,9 +136,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 20
   Lifetime: 1
-<<<<<<< HEAD
   Direction: {x: -20, y: 0}
-=======
-  Direction: {x: 0, y: 20}
->>>>>>> Art
   dmg: 1

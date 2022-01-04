@@ -66,15 +66,28 @@ public class HeadBehaviour : MonoBehaviour
         }
         else
         {
+            animator.SetInteger("ShotState", 0);
             switch (SecondDirection)
             {
                 case SHOOTINGDIRECTION.LEFT:
+                    animator.SetInteger("IdleState", 1);
+                    GetComponent<SpriteRenderer>().flipX = true;
                     break;
                 case SHOOTINGDIRECTION.RIGHT:
+                    animator.SetInteger("IdleState", 1);
+                    GetComponent<SpriteRenderer>().flipX = false;
                     break;
                 case SHOOTINGDIRECTION.UP:
+                    animator.SetInteger("IdleState", 3);
+                    GetComponent<SpriteRenderer>().flipX = false;
                     break;
                 case SHOOTINGDIRECTION.DOWN:
+                    animator.SetInteger("IdleState", 0);
+                    GetComponent<SpriteRenderer>().flipX = false;
+                    break;
+                default:
+                    animator.SetInteger("IdleState", 0);
+                    GetComponent<SpriteRenderer>().flipX = false;
                     break;
             }
         }
@@ -118,6 +131,8 @@ public class HeadBehaviour : MonoBehaviour
 
         switch (PrimaryDirection) {
             case SHOOTINGDIRECTION.LEFT:
+                animator.SetInteger("ShotState", 2); 
+                GetComponent<SpriteRenderer>().flipX = false;
                 TearTransform = LeftSpawn;
 
                 if (EyeFiring == 1)
@@ -129,6 +144,8 @@ public class HeadBehaviour : MonoBehaviour
                 break;
 
             case SHOOTINGDIRECTION.RIGHT:
+                animator.SetInteger("ShotState", 2);
+                GetComponent<SpriteRenderer>().flipX = true;
                 TearTransform = RightSpawn;
 
                 if (EyeFiring == 1)
@@ -141,6 +158,8 @@ public class HeadBehaviour : MonoBehaviour
                 break;
 
             case SHOOTINGDIRECTION.UP:
+                animator.SetInteger("ShotState", 3);
+                GetComponent<SpriteRenderer>().flipX = false;
                 Layer_Tear -= 1;
 
                 if (EyeFiring == 1)
@@ -153,6 +172,8 @@ public class HeadBehaviour : MonoBehaviour
                 break;
 
             case SHOOTINGDIRECTION.DOWN:
+                animator.SetInteger("ShotState", 1);
+                GetComponent<SpriteRenderer>().flipX = false;
                 Layer_Tear += 1;
 
                 if (EyeFiring == 1)

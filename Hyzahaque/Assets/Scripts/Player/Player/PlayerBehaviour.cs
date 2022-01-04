@@ -80,7 +80,7 @@ public class PlayerBehaviour : MonoBehaviour
             BodyAnimator.SetFloat("SpeedVertical", 0);
         }
 
-        Debug.Log("Direction X: " + currentSpeed.x + " || Direction Y" + currentSpeed.y);
+        //Debug.Log("Direction X: " + currentSpeed.x + " || Direction Y" + currentSpeed.y);
         rb2d.AddForce(currentSpeed);
     }
 
