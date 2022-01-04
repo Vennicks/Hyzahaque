@@ -16,10 +16,15 @@ public class FattyBehaviour : MonoBehaviour
     private bool CanSeePlayer = false;
 
     private Rigidbody2D rb;
+    private Animator HeadAnimator;
+    private Animator BodyAnimator;
+
 
     void Start()
     {
         rb = transform.parent.gameObject.GetComponent<Rigidbody2D>();
+        HeadAnimator = transform.parent.Find("HeadFatty").GetComponent<Animator>();
+        BodyAnimator = gameObject.GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -28,7 +33,27 @@ public class FattyBehaviour : MonoBehaviour
         Direction = new Vector3(Character_Position.x, Character_Position.y) - transform.position;
         CheckPlayer();
         if (CanSeePlayer)
+        {
+            if (Mathf.Abs(Direction.x) > Mathf.Abs(Direction.y))
+            {
+                BodyAnimator.SetBool("Turn", true);
+                HeadAnimator.SetBool("Turn", true);
+                if (Direction.x < 0)
+                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                else
+                {
+                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                }
+            }
+            else
+            {
+                BodyAnimator.SetBool("Turn", false);
+                HeadAnimator.SetBool("Turn", false);
+            }
+            
+
             rb.velocity = Direction.normalized * Speed;
+        }
     }
 
     private void SetCharacterPosition()

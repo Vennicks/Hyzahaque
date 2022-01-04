@@ -14,12 +14,15 @@ public class DipBehaviour : MonoBehaviour
     [SerializeField]
     private int Life = 2;
 
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(Dashing());
 
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -37,7 +40,15 @@ public class DipBehaviour : MonoBehaviour
         yield return new WaitForSeconds(CoolDownDash);
 
         StartCoroutine(Dashing());
+        StartCoroutine(StopDash());
+        animator.SetBool("Dash", true);
         rb.AddForce(direction * DashForce);
+    }
+
+    IEnumerator StopDash()
+    {
+        yield return new WaitForSeconds(1.7f);
+        animator.SetBool("Dash", false);
     }
 
     private void OnCollisionEnter2D(Collision2D collider)
