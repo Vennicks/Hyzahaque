@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RoomToTP: {fileID: 0}
-  StatusWhenStarting: 1
+  StatusWhenStarting: 0
 --- !u!50 &6264515714508573301
 Rigidbody2D:
   serializedVersion: 4
