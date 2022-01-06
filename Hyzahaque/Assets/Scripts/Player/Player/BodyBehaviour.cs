@@ -20,6 +20,12 @@ public class BodyBehaviour : MonoBehaviour
         
     }
 
+    IEnumerator DestroyAfterAnim(GameObject obj)
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(obj);
+    }
+
     private void PickUpCollectible(GameObject obj)
     {
         if (obj.name.Contains("BlueHeart"))
@@ -56,7 +62,8 @@ public class BodyBehaviour : MonoBehaviour
         {
             PersistentManager.Instance.Coins += 1;
             Debug.Log("Add a coin in UI");
-            Destroy(obj);
+            obj.transform.GetChild(0).transform.GetChild(0).GetComponent<Animator>().SetTrigger("Pickup");
+            StartCoroutine(DestroyAfterAnim(obj));
         }
         if (obj.name.Contains("Key"))
         {

@@ -65,7 +65,7 @@ public class FriendlyTearBehaviour : MonoBehaviour
                     go.GetComponent<FattyBehaviour>().TakeDamages(dmg);
 
                 else if (go.name.Contains("Fly"))
-                    go.GetComponent<FattyBehaviour>().TakeDamages(dmg);
+                    go.GetComponent<FlyBehaviour>().TakeDamages(dmg);
 
                 Vector2 vec = transform.position - collision.transform.position;
 
@@ -105,6 +105,14 @@ public class FriendlyTearBehaviour : MonoBehaviour
                 animator.SetTrigger("Destroy");
                 stop = true;
                 StartCoroutine(Collision());
+                break;
+
+            case "Poop":
+                animator.SetTrigger("Destroy");
+                stop = true;
+                go.GetComponent<CacaBehaviour>().TakeDamage();
+                StartCoroutine(Collision());
+
                 break;
 
             case "Player":

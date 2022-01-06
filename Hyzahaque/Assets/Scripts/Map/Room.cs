@@ -22,6 +22,32 @@ public class Room : MonoBehaviour
     private void FirstTime()
     {
         FirstTimeEntered = false;
+
+        Transform EnnemiesObject = transform.Find("Ennemies");
+
+        foreach (Transform child in EnnemiesObject.transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+
+        Transform Coins = transform.Find("Coins");
+        if (Coins != null)
+        {
+            foreach (Transform child in Coins.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+
+        Transform Hearts = transform.Find("Heart");
+        if (Hearts != null)
+        {
+            foreach (Transform child in Hearts.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+
     }
 
     public void CheckLockDoors(int withXLess = 0)

@@ -22,7 +22,7 @@ public class DipBehaviour : MonoBehaviour
         StartCoroutine(Dashing());
 
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = transform.GetChild(0).GetComponent<Animator>();
     }
 
     // Update is called once per frame

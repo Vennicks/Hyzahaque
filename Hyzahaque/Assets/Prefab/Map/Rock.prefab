@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4050824258192286698}
   - component: {fileID: 4050824258192286697}
   - component: {fileID: 4050824258192286612}
-  m_Layer: 13
+  m_Layer: 7
   m_Name: Rock
   m_TagString: Rock
   m_Icon: {fileID: 0}

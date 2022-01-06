@@ -15,6 +15,7 @@ TagManager:
   - Rock
   - Item
   - Belt
+  - Poop
   layers:
   - Default
   - TransparentFX
