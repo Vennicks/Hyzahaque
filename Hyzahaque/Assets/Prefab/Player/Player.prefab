@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29b13137fe794b41ab97233856f1c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kamikaze: {fileID: 9100000, guid: 56568e1ea29d16d4aa8eeea24223967b, type: 2}
 --- !u!70 &2057694212882935959
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

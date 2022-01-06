@@ -5,9 +5,13 @@ using UnityEngine;
 public class BodyBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    [SerializeField] private RuntimeAnimatorController kamikaze;
+
+    private Animator normal;
     void Start()
     {
-        
+        normal = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -85,6 +89,8 @@ public class BodyBehaviour : MonoBehaviour
                 GameObject[] player = GameObject.FindGameObjectsWithTag("Belt");
                 foreach (GameObject item in player)
                     Destroy(item);
+
+                normal.runtimeAnimatorController = kamikaze;
                 transform.parent.GetComponent<PlayerBehaviour>().GotExplosiveBelt = true;
                 break;
 
