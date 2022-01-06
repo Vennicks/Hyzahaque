@@ -5,15 +5,25 @@ using UnityEngine;
 public class BodyBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    [SerializeField] private RuntimeAnimatorController kamikaze;
+
+    private Animator normal;
     void Start()
     {
-        
+        normal = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    IEnumerator DestroyAfterAnim(GameObject obj)
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(obj);
     }
 
     private void PickUpCollectible(GameObject obj)
@@ -52,7 +62,8 @@ public class BodyBehaviour : MonoBehaviour
         {
             PersistentManager.Instance.Coins += 1;
             Debug.Log("Add a coin in UI");
-            Destroy(obj);
+            obj.transform.GetChild(0).transform.GetChild(0).GetComponent<Animator>().SetTrigger("Pickup");
+            StartCoroutine(DestroyAfterAnim(obj));
         }
         if (obj.name.Contains("Key"))
         {
@@ -82,6 +93,11 @@ public class BodyBehaviour : MonoBehaviour
                 break;
 
             case "Item":
+                GameObject[] player = GameObject.FindGameObjectsWithTag("Belt");
+                foreach (GameObject item in player)
+                    Destroy(item);
+
+                normal.runtimeAnimatorController = kamikaze;
                 transform.parent.GetComponent<PlayerBehaviour>().GotExplosiveBelt = true;
                 break;
 

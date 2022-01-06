@@ -9,7 +9,7 @@ public class NormalDoors : MonoBehaviour
 
     [SerializeField] Transform RoomToTP;
 
-    [SerializeField] bool StatusWhenStarting = true;
+    [SerializeField] public bool StatusWhenStarting = true;
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +54,7 @@ public class NormalDoors : MonoBehaviour
         if (collider.gameObject.tag == "Player")
         {
             collider.transform.parent.transform.SetPositionAndRotation(new Vector3(RoomToTP.position.x, RoomToTP.position.y, 0), collider.transform.rotation);
-
+            RoomToTP.parent.parent.GetComponent<Room>().CheckLockDoors();
             GameObject camera = GameObject.Find("Camera");
 
             if (gameObject.name.Contains("West"))

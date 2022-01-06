@@ -7,6 +7,9 @@ public class FlyBehaviour : MonoBehaviour
     [SerializeField]
     private float Speed = 5;
 
+    [SerializeField]
+    private int Life = 2;
+
     private Vector3 Direction;
     private Vector2 Character_Position;
 
@@ -43,6 +46,17 @@ public class FlyBehaviour : MonoBehaviour
 
         if (go.tag == "Player")
             go.transform.parent.GetComponent<PlayerBehaviour>().TakeDamages(1);
+    }
+
+    public void TakeDamages(int dmg)
+    {
+        Life -= dmg;
+
+        if (Life <= 0)
+        {
+            transform.parent.parent.GetComponent<Room>().CheckLockDoors(1);
+            Destroy(gameObject);
+        }
     }
 
 }

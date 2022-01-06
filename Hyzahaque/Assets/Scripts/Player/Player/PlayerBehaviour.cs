@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private BodyBehaviour Body;
     private HeadBehaviour Head;
+    private Animator BodyAnimator;
+    private Animator HeadAnimator;
 
     //keep in memory the current movement performed
     private Vector2 currentMovement;
@@ -52,6 +55,8 @@ public class PlayerBehaviour : MonoBehaviour
         Head = transform.GetChild(0).gameObject.GetComponent<HeadBehaviour>();
         Body = transform.GetChild(1).gameObject.GetComponent<BodyBehaviour>();
 
+        BodyAnimator = Body.GetComponent<Animator>();
+
         explode.GetComponent<Explosion>().damages = 1;
     }
 
@@ -59,7 +64,23 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         Vector2 currentSpeed = currentMovement * Time.deltaTime * speed;
+        if (currentSpeed.y < 0 || currentSpeed.y > 0)
+        {
+            BodyAnimator.SetFloat("SpeedHorizontal", 0);
+            BodyAnimator.SetFloat("SpeedVertical", currentSpeed.y);
+        }
+        else if (currentSpeed.x < 0 || currentSpeed.x > 0)
+        {
+            BodyAnimator.SetFloat("SpeedVertical", 0);
+            BodyAnimator.SetFloat("SpeedHorizontal", Math.Abs(currentSpeed.x));
+            Body.GetComponent<SpriteRenderer>().flipX = (currentSpeed.x < 0) ? true : false;
+        } else
+        {
+            BodyAnimator.SetFloat("SpeedHorizontal", 0);
+            BodyAnimator.SetFloat("SpeedVertical", 0);
+        }
 
+        //Debug.Log("Direction X: " + currentSpeed.x + " || Direction Y" + currentSpeed.y);
         rb2d.AddForce(currentSpeed);
     }
 
@@ -67,11 +88,13 @@ public class PlayerBehaviour : MonoBehaviour
     {
         currentMovement = ctx.ReadValue<Vector2>();
 
-        if (currentMovement.x != 0)
-            Head.SecondDirection = currentMovement.x > 0 ? HeadBehaviour.SHOOTINGDIRECTION.RIGHT : HeadBehaviour.SHOOTINGDIRECTION.LEFT;
-        else if (currentMovement.y != 0)
+        if (currentMovement.y != 0)
+        {
             Head.SecondDirection = currentMovement.y > 0 ? HeadBehaviour.SHOOTINGDIRECTION.UP : HeadBehaviour.SHOOTINGDIRECTION.DOWN;
-        else
+        }  else if (currentMovement.x != 0)
+        {
+            Head.SecondDirection = currentMovement.x > 0 ? HeadBehaviour.SHOOTINGDIRECTION.RIGHT : HeadBehaviour.SHOOTINGDIRECTION.LEFT;
+        } else
             Head.SecondDirection = HeadBehaviour.SHOOTINGDIRECTION.DOWN;
     }
 
