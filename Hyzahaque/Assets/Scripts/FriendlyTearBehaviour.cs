@@ -29,7 +29,7 @@ public class FriendlyTearBehaviour : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log("Speed:" + Speed + " - Lifetime: " + Lifetime + " - Velocity: " + rdb2.velocity + " - Direction: " + Direction);
+        //Debug.Log("Speed:" + Speed + " - Lifetime: " + Lifetime + " - Velocity: " + rdb2.velocity + " - Direction: " + Direction);
         if (!stop)
             rdb2.velocity = (Direction * Speed * Time.deltaTime);
         else
@@ -54,7 +54,7 @@ public class FriendlyTearBehaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject go = collision.gameObject;
-        Debug.Log(go.tag);
+        //Debug.Log(go.tag);
         switch (go.tag)
         {
             case "Ennemy":

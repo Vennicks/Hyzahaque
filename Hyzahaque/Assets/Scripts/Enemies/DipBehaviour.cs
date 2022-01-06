@@ -67,7 +67,10 @@ public class DipBehaviour : MonoBehaviour
         Life -= dmg;
 
         if (Life <= 0)
+        {
+            transform.parent.parent.GetComponent<Room>().CheckLockDoors(1);
             Destroy(gameObject);
+        }
     }
 
 }
