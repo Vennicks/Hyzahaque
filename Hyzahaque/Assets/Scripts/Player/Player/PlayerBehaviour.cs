@@ -88,9 +88,11 @@ public class PlayerBehaviour : MonoBehaviour
     {
         currentMovement = ctx.ReadValue<Vector2>();
 
-        if (currentMovement.x != 0) {
+        if (currentMovement.y != 0)
+        {
             Head.SecondDirection = currentMovement.y > 0 ? HeadBehaviour.SHOOTINGDIRECTION.UP : HeadBehaviour.SHOOTINGDIRECTION.DOWN;
-        }  else if (currentMovement.y != 0) {
+        }  else if (currentMovement.x != 0)
+        {
             Head.SecondDirection = currentMovement.x > 0 ? HeadBehaviour.SHOOTINGDIRECTION.RIGHT : HeadBehaviour.SHOOTINGDIRECTION.LEFT;
         } else
             Head.SecondDirection = HeadBehaviour.SHOOTINGDIRECTION.DOWN;

@@ -82,6 +82,9 @@ public class BodyBehaviour : MonoBehaviour
                 break;
 
             case "Item":
+                GameObject[] player = GameObject.FindGameObjectsWithTag("Belt");
+                foreach (GameObject item in player)
+                    Destroy(item);
                 transform.parent.GetComponent<PlayerBehaviour>().GotExplosiveBelt = true;
                 break;
 

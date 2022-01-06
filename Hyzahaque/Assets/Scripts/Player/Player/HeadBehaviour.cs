@@ -57,12 +57,19 @@ public class HeadBehaviour : MonoBehaviour
         inputMap.PlayerInput.Shooting.Enable();
     }
 
+    void OnDestroy()
+    {
+        inputMap.PlayerInput.Shooting.performed -= Firing;
+        inputMap.PlayerInput.Shooting.canceled -= Cancel;
+    }
+
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (FiringStatus)
         {
-            HandleFiring();
+            if (CanFire)
+                HandleFiring();
         }
         else
         {
@@ -97,6 +104,8 @@ public class HeadBehaviour : MonoBehaviour
     { 
         Vector2 ShootingDir = ctx.ReadValue<Vector2>();
 
+        //Debug.Log("ShootingDir" + ShootingDir.ToString());
+
         FiringStatus = true;
 
         if (ShootingDir.x != 0)
@@ -120,8 +129,8 @@ public class HeadBehaviour : MonoBehaviour
 
     void HandleFiring()
     {
-        if (!CanFire)
-            return;
+
+        CanFire = false;
 
         Transform TearTransform = null;
 
@@ -129,31 +138,44 @@ public class HeadBehaviour : MonoBehaviour
 
         Vector2 Direc = new Vector2(0, 0);
 
+        Vector2 positionTear = Vector2.zero;
+
         switch (PrimaryDirection) {
             case SHOOTINGDIRECTION.LEFT:
                 animator.SetInteger("ShotState", 2); 
                 GetComponent<SpriteRenderer>().flipX = false;
                 TearTransform = LeftSpawn;
 
+                positionTear = TearTransform.transform.position;
+
                 if (EyeFiring == 1)
+                {
                     Layer_Tear -= 1;
+                    positionTear.y = positionTear.y + 0.2f;
+                }
                 else
                     Layer_Tear += 1;
 
-                Direc.x += TearForce;
+
+                Direc = new Vector2(TearForce, 0);
                 break;
 
             case SHOOTINGDIRECTION.RIGHT:
                 animator.SetInteger("ShotState", 2);
                 GetComponent<SpriteRenderer>().flipX = true;
                 TearTransform = RightSpawn;
+                positionTear = TearTransform.transform.position;
 
                 if (EyeFiring == 1)
+                {
                     Layer_Tear -= 1;
+                    positionTear.y = positionTear.y + 0.2f;
+                }
                 else
                     Layer_Tear += 1;
 
-                Direc.x -= TearForce;
+
+                Direc = new Vector2(-TearForce, 0);
 
                 break;
 
@@ -167,8 +189,9 @@ public class HeadBehaviour : MonoBehaviour
                 else
                     TearTransform = LeftSpawn;
 
+                positionTear = TearTransform.transform.position;
 
-                Direc.y += TearForce;
+                Direc = new Vector2(0, TearForce);
                 break;
 
             case SHOOTINGDIRECTION.DOWN:
@@ -181,7 +204,9 @@ public class HeadBehaviour : MonoBehaviour
                 else
                     TearTransform = LeftSpawn;
 
-                Direc.y -= TearForce;
+                positionTear = TearTransform.transform.position;
+
+                Direc = new Vector2(0, -TearForce);
                 break;
 
             default:
@@ -191,16 +216,15 @@ public class HeadBehaviour : MonoBehaviour
 
         GameObject NewTear = Tear;
 
-        Tear.GetComponent<SpriteRenderer>().sortingOrder = Layer_Tear;
-        Tear.GetComponent<FriendlyTearBehaviour>().Direction = Direc;
-        Tear.GetComponent<FriendlyTearBehaviour>().Speed = TearForce;
-        Tear.GetComponent<FriendlyTearBehaviour>().Lifetime = TearLifetime;
+        NewTear.GetComponent<SpriteRenderer>().sortingOrder = Layer_Tear;
+        NewTear.GetComponent<FriendlyTearBehaviour>().Direction = Direc;
+        NewTear.GetComponent<FriendlyTearBehaviour>().Speed = TearForce;
+        NewTear.GetComponent<FriendlyTearBehaviour>().Lifetime = TearLifetime;
+        //Debug.Log(NewTear.GetComponent<FriendlyTearBehaviour>().Direction);
 
-        Instantiate(NewTear, TearTransform.position, transform.localRotation);
-
+        Instantiate(NewTear, positionTear, transform.localRotation);
         EyeFiring *= -1; //Invert crying eye
 
-        CanFire = false;
 
         StartCoroutine(EnableFiring());
     }
