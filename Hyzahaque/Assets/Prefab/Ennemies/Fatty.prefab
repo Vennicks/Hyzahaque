@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 1464820566691101025}
   - component: {fileID: 1464820566691101055}
   - component: {fileID: 650474678378585634}
-  m_Layer: 13
+  m_Layer: 10
   m_Name: BodyFatty
   m_TagString: Ennemy
   m_Icon: {fileID: 0}

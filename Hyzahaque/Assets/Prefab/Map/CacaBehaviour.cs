@@ -15,7 +15,7 @@ public class CacaBehaviour : MonoBehaviour
 
     private void OnDestroy()
     {
-        State = 3;
+        State = 2;
         GetComponent<BoxCollider2D>().enabled = false;
     }
 
@@ -28,7 +28,7 @@ public class CacaBehaviour : MonoBehaviour
     public void TakeDamage()
     {
         State += 1;
-        if (State == 3)
+        if (State == 2)
             GetComponent<BoxCollider2D>().enabled = false;
     }
 
