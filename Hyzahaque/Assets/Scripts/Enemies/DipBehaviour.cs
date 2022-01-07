@@ -47,7 +47,7 @@ public class DipBehaviour : MonoBehaviour
 
     IEnumerator StopDash()
     {
-        yield return new WaitForSeconds(1.7f);
+        yield return new WaitForSeconds(1.1f);
         animator.SetBool("Dash", false);
     }
 

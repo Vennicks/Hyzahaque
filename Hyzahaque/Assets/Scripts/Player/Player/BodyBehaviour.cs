@@ -55,7 +55,9 @@ public class BodyBehaviour : MonoBehaviour
         if (obj.name.Contains("BombItem") && obj.name != "ExplodingBomb")
         {
             PersistentManager.Instance.Bombs += 1;
+
             Debug.Log("Add a bomb in UI");
+
             Destroy(obj);
         }
         if (obj.name.Contains("Coin"))
