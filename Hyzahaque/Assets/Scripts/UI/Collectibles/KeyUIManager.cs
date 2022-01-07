@@ -11,8 +11,8 @@ public class KeyUIManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        Debug.Log("key" + PersistentManager.Instance.name);
-       keyText.text = PersistentManager.Instance.Keys.ToString();
+    { 
+        //Debug.Log("key" + PersistentManager.Instance.name);
+        keyText.text = PersistentManager.Instance.Keys.ToString();
     }
 }

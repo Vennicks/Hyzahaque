@@ -20,39 +20,31 @@ public class HeartSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {        
-        switch (life)
-        {
-            case 1:
-                Destroy(hearts[0].gameObject);
-                break;
-            case 2:
-                Destroy(hearts[1].gameObject);
-                break;
-            case 3:
-                Destroy(hearts[2].gameObject);
-                break;
-            case 4:
-                Destroy(hearts[3].gameObject);
-                break;
-            case 5:
-                Destroy(hearts[4].gameObject);
-                break;
-            case 6:
-                Destroy(hearts[5].gameObject);
-                break;
-            default:
-                break;
-        }
 
     }
 
+
+
     public void TakeDamage(int d)
     {
-        life -= d;
-        Destroy(hearts[life].gameObject);
-        if(life < 1)
+        int lifeCopy = life;
+        for (int i = 0; i != d; i++)
         {
-            isDead = true;
+            hearts[life - i - 1].gameObject.SetActive(false);
+            life--;
         }
+
+        life = lifeCopy - d;
+    }
+
+    public void GetLife(int d)
+    {
+        int lifeCopy = life;
+        for (int i = 0; i != d; i++)
+        {
+            hearts[life + i - 1].gameObject.SetActive(true);
+            life++;
+        }
+        life = lifeCopy + d;
     }
 }

@@ -50,6 +50,16 @@ public class Room : MonoBehaviour
                 child.gameObject.SetActive(true);
             }
         }
+
+        Transform Keys = transform.Find("Keys");
+        if (Keys != null)
+        {
+            foreach (Transform child in Keys.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+
         Transform Bomb = transform.Find("Bombs");
         if (Bomb != null)
         {

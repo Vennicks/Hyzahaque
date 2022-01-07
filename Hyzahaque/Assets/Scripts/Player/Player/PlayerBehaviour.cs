@@ -120,12 +120,12 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (!CanTakeDMG)
             return;
-        CanTakeDMG = false;
-        UI.GetComponent<HeartSystem>().TakeDamage(dmg);
         StartCoroutine(CoolDownTD());
         PersistentManager.Instance.CurrentHealth -= dmg;
         if (PersistentManager.Instance.CurrentHealth <= 0)
             SceneManager.LoadScene(0);
+        UI.GetComponent<HeartSystem>().TakeDamage(dmg);
+        CanTakeDMG = false;
     }
 
     void UseBomb(InputAction.CallbackContext ctx)

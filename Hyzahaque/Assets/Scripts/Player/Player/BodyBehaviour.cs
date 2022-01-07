@@ -34,10 +34,11 @@ public class BodyBehaviour : MonoBehaviour
             Debug.Log("Add BlueHeart in UI");
             Destroy(obj);
         }
-        if (obj.name.Contains("RedHeart"))
+        if (obj.name.Contains("REDHEART"))
         {
             if (PersistentManager.Instance.CurrentHealth <= PersistentManager.Instance.MaxHealth - 2)
             {
+                GameObject.FindGameObjectsWithTag("UI")[0].GetComponent<HeartSystem>().GetLife(2);
                 PersistentManager.Instance.CurrentHealth += 2;
                 Debug.Log("Fill up 2 half of heart in UI");
                 Destroy(obj);
@@ -66,7 +67,7 @@ public class BodyBehaviour : MonoBehaviour
             Debug.Log("Add a coin in UI");
             Destroy(obj);
         }
-        if (obj.name.Contains("Key"))
+        if (obj.name.Contains("KEY"))
         {
             PersistentManager.Instance.Keys += 1;
             Debug.Log("Add a key in UI");

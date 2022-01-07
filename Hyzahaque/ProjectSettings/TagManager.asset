@@ -16,6 +16,8 @@ TagManager:
   - Item
   - Belt
   - Poop
+  - Spike
+  - UI
   layers:
   - Default
   - TransparentFX
