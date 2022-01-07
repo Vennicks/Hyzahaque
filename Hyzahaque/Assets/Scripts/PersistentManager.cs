@@ -7,7 +7,7 @@ public class PersistentManager : MonoBehaviour {
 
     public int MaxHealth = 6;
 
-    public int CurrentHealth = 5;
+    public int CurrentHealth = 6;
 
     public int Coins = 0;
     public int Bombs = 0;
