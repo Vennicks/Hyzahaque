@@ -37,7 +37,6 @@ public class FattyBehaviour : MonoBehaviour
             if (Mathf.Abs(Direction.x) > Mathf.Abs(Direction.y))
             {
                 BodyAnimator.SetBool("Turn", true);
-                HeadAnimator.SetBool("Turn", true);
                 if (Direction.x < 0)
                     gameObject.GetComponent<SpriteRenderer>().flipX = true;
                 else
@@ -48,7 +47,6 @@ public class FattyBehaviour : MonoBehaviour
             else
             {
                 BodyAnimator.SetBool("Turn", false);
-                HeadAnimator.SetBool("Turn", false);
             }
             
 
@@ -89,7 +87,10 @@ public class FattyBehaviour : MonoBehaviour
         Life -= dmg;
 
         if (Life <= 0)
+        {
+            transform.parent.parent.parent.GetComponent<Room>().CheckLockDoors(1);
             Destroy(transform.parent.gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

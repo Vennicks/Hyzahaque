@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -119,7 +120,8 @@ public class PlayerBehaviour : MonoBehaviour
         CanTakeDMG = false;
         StartCoroutine(CoolDownTD());
         PersistentManager.Instance.CurrentHealth -= dmg;
-        Debug.Log("Took " + dmg + " damages");
+        if (PersistentManager.Instance.CurrentHealth <= 0)
+            SceneManager.LoadScene(0);
     }
 
     void UseBomb(InputAction.CallbackContext ctx)
