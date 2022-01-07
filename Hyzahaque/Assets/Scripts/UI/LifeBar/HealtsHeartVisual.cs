@@ -5,9 +5,23 @@ using UnityEngine.UI;
 
 public class HealtsHeartVisual : MonoBehaviour
 {
+    [SerializeField] private Sprite heartSprite;
+
+    private void start()
+    {
+
+    }
     private Image CreateHeartImage()
     {
+        //Create Game Object
         GameObject heartGameObject = new GameObject("Heart",typeof(Image));
-        return null;
+        //Set as child of this transform
+        heartGameObject.transform.parent = transform;
+        heartGameObject.transform.localPosition = Vector3.zero;
+        //Set heart sprite
+        Image heartImage = heartGameObject.GetComponent<Image>();
+        heartImage.sprite = heartSprite;
+
+        return heartImage;
     }
 }
