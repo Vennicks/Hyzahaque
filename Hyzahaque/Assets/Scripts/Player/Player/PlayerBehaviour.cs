@@ -33,6 +33,9 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     public GameObject explode;
 
+    [SerializeField]
+    public GameObject UI;
+
     public bool GotExplosiveBelt = false;
     private bool CanTakeDMG = true;
 
@@ -118,6 +121,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (!CanTakeDMG)
             return;
         CanTakeDMG = false;
+        UI.GetComponent<HeartSystem>().TakeDamage(dmg);
         StartCoroutine(CoolDownTD());
         PersistentManager.Instance.CurrentHealth -= dmg;
         if (PersistentManager.Instance.CurrentHealth <= 0)

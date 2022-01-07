@@ -6,32 +6,53 @@ public class HeartSystem : MonoBehaviour
 {
     public GameObject[] hearts;
     public int life;
-     void Start()
+
+    private bool isDead;
+
+
+    private void Start()
     {
-        life = PersistentManager.Instance.CurrentHealth;
+        life = hearts.Length;
     }
+
+
 
     // Update is called once per frame
     void Update()
-    {
-        if(life < 1)
+    {        
+        switch (life)
         {
-            Destroy(hearts[0].gameObject);
-        }else if(life < 2)
-        {
-            Destroy(hearts[1].gameObject);
+            case 1:
+                Destroy(hearts[0].gameObject);
+                break;
+            case 2:
+                Destroy(hearts[1].gameObject);
+                break;
+            case 3:
+                Destroy(hearts[2].gameObject);
+                break;
+            case 4:
+                Destroy(hearts[3].gameObject);
+                break;
+            case 5:
+                Destroy(hearts[4].gameObject);
+                break;
+            case 6:
+                Destroy(hearts[5].gameObject);
+                break;
+            default:
+                break;
         }
-        else if (life < 3)
-        {
-            Destroy(hearts[2].gameObject);
-        }
+
     }
 
-   
-    
-    
-    public void TakeDamage()
+    public void TakeDamage(int d)
     {
         life -= d;
+        Destroy(hearts[life].gameObject);
+        if(life < 1)
+        {
+            isDead = true;
+        }
     }
 }
