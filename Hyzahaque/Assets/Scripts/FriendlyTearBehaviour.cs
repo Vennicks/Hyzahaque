@@ -40,6 +40,7 @@ public class FriendlyTearBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(Lifetime);
         Speed = 0;
+        GetComponent<CircleCollider2D>().enabled = false;
         animator.SetTrigger("Destroy");
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
@@ -47,13 +48,14 @@ public class FriendlyTearBehaviour : MonoBehaviour
 
     IEnumerator Collision()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject go = collision.gameObject;
+        GetComponent<CircleCollider2D>().enabled = false;
         //Debug.Log(go.tag);
         switch (go.tag)
         {
@@ -67,9 +69,9 @@ public class FriendlyTearBehaviour : MonoBehaviour
                 else if (go.name.Contains("Fly"))
                     go.GetComponent<FlyBehaviour>().TakeDamages(dmg);
 
-                Vector2 vec = transform.position - collision.transform.position;
+                Vector2 vec =  collision.transform.position - transform.position;
 
-                go.GetComponent<Rigidbody2D>().AddForce(vec.normalized * 2);
+                go.GetComponent<Rigidbody2D>().AddForce(Direction.normalized * 2, ForceMode2D.Impulse);
 
                 animator.SetTrigger("Destroy");
                 stop = true;
