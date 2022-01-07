@@ -25,9 +25,9 @@ public class CacaBehaviour : MonoBehaviour
         animator.SetInteger("State", State);
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int dmg = 1)
     {
-        State += 1;
+        State += dmg;
         if (State == 2)
             GetComponent<BoxCollider2D>().enabled = false;
     }

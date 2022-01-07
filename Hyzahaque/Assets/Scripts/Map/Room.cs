@@ -58,7 +58,7 @@ public class Room : MonoBehaviour
         Transform EnnemiesObject = transform.Find("Ennemies");
         Transform DoorsObject = transform.Find("Doors");
 
-        Debug.Log("ChildCount: " + EnnemiesObject.childCount);
+        //Debug.Log("ChildCount: " + EnnemiesObject.childCount);
         if (EnnemiesObject.childCount - withXLess <= 0)
         {
             foreach (Transform child in DoorsObject.transform)
