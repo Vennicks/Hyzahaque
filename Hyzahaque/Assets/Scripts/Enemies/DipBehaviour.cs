@@ -14,15 +14,18 @@ public class DipBehaviour : MonoBehaviour
     [SerializeField]
     private int Life = 2;
 
+    private bool isBouncing = false;
+
     private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Dashing());
 
         rb = GetComponent<Rigidbody2D>();
         animator = transform.GetChild(0).GetComponent<Animator>();
+
+        StartCoroutine(Dashing());
     }
 
     // Update is called once per frame
@@ -37,7 +40,11 @@ public class DipBehaviour : MonoBehaviour
         if (direction == Vector2.zero)
             Dashing();
 
+        rb.drag = 5;
+
         yield return new WaitForSeconds(CoolDownDash);
+
+        rb.drag = 30;
 
         StartCoroutine(Dashing());
         StartCoroutine(StopDash());
@@ -59,7 +66,18 @@ public class DipBehaviour : MonoBehaviour
         if (go.tag == "Player")
         {
             go.GetComponent<PlayerBehaviour>().TakeDamages(1);
+        } else if (go.tag == "Walls" || go.tag == "NormalDoor")
+        {
+            float bounce = 70f; //amount of force to apply
+            rb.AddForce(collider.contacts[0].normal * bounce);
+            isBouncing = true;
+            Invoke("StopBounce", 0.3f);
         }
+    }
+
+    void StopBounce()
+    {
+        isBouncing = false;
     }
 
     public void TakeDamages(int dmg)

@@ -60,18 +60,23 @@ public class FriendlyTearBehaviour : MonoBehaviour
         switch (go.tag)
         {
             case "Ennemy":
+                Vector2 vec = collision.transform.position - transform.position;
                 if (go.name.Contains("Dip"))
+                {
                     go.GetComponent<DipBehaviour>().TakeDamages(dmg);
-
+                    go.GetComponent<Rigidbody2D>().drag = 30;
+                    go.GetComponent<Rigidbody2D>().AddForce(Direction.normalized * 17, ForceMode2D.Impulse);
+                }
                 else if (go.name.Contains("Fatty"))
+                {
                     go.GetComponent<FattyBehaviour>().TakeDamages(dmg);
-
-                else if (go.name.Contains("Fly"))
+                    go.transform.parent.GetComponent<Rigidbody2D>().AddForce(Direction.normalized * 17, ForceMode2D.Impulse);
+                } else if (go.name.Contains("Fly"))
+                {
                     go.GetComponent<FlyBehaviour>().TakeDamages(dmg);
+                }
 
-                Vector2 vec =  collision.transform.position - transform.position;
 
-                go.GetComponent<Rigidbody2D>().AddForce(Direction.normalized * 2, ForceMode2D.Impulse);
 
                 animator.SetTrigger("Destroy");
                 stop = true;

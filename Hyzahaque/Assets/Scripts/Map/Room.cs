@@ -19,7 +19,7 @@ public class Room : MonoBehaviour
         
     }
 
-    private void FirstTime()
+    private void FirstTime(int withless = 0)
     {
         FirstTimeEntered = false;
 
@@ -29,6 +29,9 @@ public class Room : MonoBehaviour
         {
             child.gameObject.SetActive(true);
         }
+
+        if (EnnemiesObject.transform.childCount - withless > 0)
+            return;
 
         Transform Coins = transform.Find("Coins");
         if (Coins != null)
@@ -47,30 +50,39 @@ public class Room : MonoBehaviour
                 child.gameObject.SetActive(true);
             }
         }
+        Transform Bomb = transform.Find("Bombs");
+        if (Bomb != null)
+        {
+            foreach (Transform child in Bomb.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
 
     }
 
     public void CheckLockDoors(int withXLess = 0)
     {
-        if (FirstTimeEntered)
-            FirstTime();
-
         Transform EnnemiesObject = transform.Find("Ennemies");
         Transform DoorsObject = transform.Find("Doors");
 
+       if (FirstTimeEntered) 
+            FirstTime();
+
         //Debug.Log("ChildCount: " + EnnemiesObject.childCount);
-        if (EnnemiesObject.childCount - withXLess <= 0)
-        {
-            foreach (Transform child in DoorsObject.transform)
-            {
-                child.gameObject.GetComponent<NormalDoors>().Unlock();
-            }
-        } else
+        if (EnnemiesObject.childCount - withXLess > 0)
         {
             foreach (Transform child in DoorsObject.transform)
             {
                 child.gameObject.GetComponent<NormalDoors>().Lock();
             }
+        } else
+        {
+            foreach (Transform child in DoorsObject.transform)
+            {
+                child.gameObject.GetComponent<NormalDoors>().Unlock();
+            }
+            FirstTime(withXLess);
         }
     }
 }

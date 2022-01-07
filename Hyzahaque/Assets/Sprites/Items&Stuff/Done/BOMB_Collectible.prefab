@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5931183179194957048}
   - component: {fileID: 5931183179194957054}
   - component: {fileID: 5931183179194957049}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,9 +111,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5931183179939177504}
-  m_Layer: 0
+  - component: {fileID: 6952153737751245178}
+  - component: {fileID: 5213166672043937471}
+  - component: {fileID: 7009551006945463374}
+  m_Layer: 9
   m_Name: BOMB_Collectible
-  m_TagString: Untagged
+  m_TagString: Collectibles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,3 +136,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &6952153737751245178
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5931183179939177507}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0056580603, y: -0.0147114545}
+  serializedVersion: 2
+  m_Radius: 0.090342626
+--- !u!50 &5213166672043937471
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5931183179939177507}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 2
+  m_AngularDrag: 5
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &7009551006945463374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5931183179939177507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6ca526a859a5144880986807f6a9a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
