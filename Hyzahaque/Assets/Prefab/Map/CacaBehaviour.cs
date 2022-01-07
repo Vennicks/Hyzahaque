@@ -15,7 +15,7 @@ public class CacaBehaviour : MonoBehaviour
 
     private void OnDestroy()
     {
-        State = 3;
+        State = 2;
         GetComponent<BoxCollider2D>().enabled = false;
     }
 
@@ -25,10 +25,10 @@ public class CacaBehaviour : MonoBehaviour
         animator.SetInteger("State", State);
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int dmg = 1)
     {
-        State += 1;
-        if (State == 3)
+        State += dmg;
+        if (State == 2)
             GetComponent<BoxCollider2D>().enabled = false;
     }
 

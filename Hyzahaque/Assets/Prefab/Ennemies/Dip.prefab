@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5988838951839047780}
   - component: {fileID: 5988838951839047783}
   - component: {fileID: 5988838951839047802}
-  m_Layer: 13
+  m_Layer: 10
   m_Name: Dip
   m_TagString: Ennemy
   m_Icon: {fileID: 0}
@@ -73,8 +73,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 4.5
-  m_AngularDrag: 3
+  m_LinearDrag: 30
+  m_AngularDrag: 7
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoolDownDash: 2.5
-  DashForce: 600
+  DashForce: 1000
   Life: 2
 --- !u!1 &7670534484223042224
 GameObject:
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 2788329188228428004}
   - component: {fileID: 3659085676888129066}
   - component: {fileID: 8004197599414561482}
-  m_Layer: 13
+  m_Layer: 10
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

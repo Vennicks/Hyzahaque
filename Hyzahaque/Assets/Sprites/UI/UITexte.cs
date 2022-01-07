@@ -5,6 +5,8 @@ using UnityEngine;
 public class UITexte : MonoBehaviour
 {
     public Animator myUIText;
+
+    private bool triggered = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +20,11 @@ public class UITexte : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (!triggered && other.gameObject.tag == "Player")
         {
+            triggered = true;
             myUIText.SetTrigger("Enter");
         }
+        triggered = true;
     }
 }

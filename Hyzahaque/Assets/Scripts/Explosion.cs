@@ -24,7 +24,7 @@ public class Explosion : MonoBehaviour
     {
         GameObject go = collision.gameObject;
 
-
+        Debug.Log(go.tag);
 
         switch (go.tag)
         {
@@ -33,7 +33,14 @@ public class Explosion : MonoBehaviour
                 break;
 
             case "Ennemy":
-                Destroy(go);
+                if (go.name.Contains("Dip"))
+                    go.GetComponent<DipBehaviour>().TakeDamages(20);
+
+                else if (go.name.Contains("Fatty"))
+                    go.GetComponent<FattyBehaviour>().TakeDamages(20);
+
+                else if (go.name.Contains("Fly"))
+                    go.GetComponent<FlyBehaviour>().TakeDamages(20);
                 break;
 
             case "NormalDoor":
@@ -50,8 +57,11 @@ public class Explosion : MonoBehaviour
                 break;
 
             case "Rock":
-                Debug.Log("Rock destroyed");
                 go.GetComponent<NormalRock>().OnExplode();
+                break;
+
+            case "Poop":
+                go.GetComponent<CacaBehaviour>().TakeDamage(2);
                 break;
 
             case "Collectibles":

@@ -52,7 +52,7 @@ public class BodyBehaviour : MonoBehaviour
                 Destroy(obj);
             }
         }
-        if (obj.name.Contains("BombItem") && obj.name != "ExplodingBomb")
+        if (obj.name.Contains("BOMB") && obj.name != "ExplodingBomb")
         {
             PersistentManager.Instance.Bombs += 1;
 
@@ -64,8 +64,7 @@ public class BodyBehaviour : MonoBehaviour
         {
             PersistentManager.Instance.Coins += 1;
             Debug.Log("Add a coin in UI");
-            obj.transform.GetChild(0).transform.GetChild(0).GetComponent<Animator>().SetTrigger("Pickup");
-            StartCoroutine(DestroyAfterAnim(obj));
+            Destroy(obj);
         }
         if (obj.name.Contains("Key"))
         {
